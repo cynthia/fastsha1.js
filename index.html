@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+
+<head>
+
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="author" content="Sangwhan Moon">
+
+<script type="text/javascript" src="js/sha1.js"></script>
+<script type="text/javascript" src="js/fastsha1.min.js"></script>
+<script type="text/javascript" src="js/cryptojs_sha1.js"></script>
+<script type="text/javascript" src="js/mt_sha1.js"></script>
+<script type="text/javascript" src="js/jssha_sha1.js"></script>
+<script type="text/javascript" src="js/benchmark.js"></script>
+
+<style type="text/css" media="screen">
+    * { font-family: sans-serif; }
+    input { width: 26em; }
+    textarea { width: 97%; min-height: 150px }
+</style>
+
+<title>fastsha1.js Test Page</title>
+
+<base href="./">
+
+</head>
+
+<body>
+<h1>fastsha1.js Test</h1>
+
+<p>
+fastsha1.js is a experiment to see how far a existing JavaScript codebase can be hand
+optimized during a single night with a dash of insanity and a 500ml bottle of soda.
+</p>
+
+<p>
+As of the time of writing, this seems to be the fastest pure JavaScript implementation of
+SHA-1 when run on Chrome (Tested on 35, where it reaches around 22MB/s hash rate on a Core i5
+Macbook Air using the default dataset) and IE (Tested on 11). It's usually the second fastest on
+Presto Opera, Safari and Firefox. On Safari (Tested on 7) it should be just marginally slower
+than jsSHA, and on Firefox it's a bit slower than CryptoJS. On Presto Opera it happens to be
+slightly slower than the webtoolkit.info implementation, which I haven't investigated yet.
+</p>
+
+<p>
+While it does generate the exact same hash as other implementations, this implementation has
+not been audited in any way or form so do avoid using it for anything serious.
+</p>
+
+<h3>Run Count</h3>
+<p>
+    Adjust how many iterations (samples) to be used in each run.
+</p>
+<span id="runcount_label"></span><input id="runcount" type="range" min="1" max="200" value="100" onChange="updateRunCount(this.value);">
+
+<h3>Data to Hash</h3>
+<p>
+    The data in the textarea will be used for the tests below.
+</p>
+<p>
+    Auto generate:
+    <a href="javascript:generateTestData(kMixed);">Mixed (Default)</a>
+    <a href="javascript:generateTestData(kAscii);">Ascii</a>
+    <a href="javascript:generateTestData(kKorean);">Korean</a>
+    <a href="javascript:generateTestData(kJapanese);">Japanese</a>
+</p>
+<textarea id="in">
+</textarea>
+
+<h3>Results</h3>
+<p>
+    First runs should normally be ignored, as there is JIT warm-up time.
+    If the hash results differ between tests on the same data, something is really wrong!
+</p>
+<ul>
+
+<li>
+    <a href="javascript:benchmark(document.getElementById('in').value, kFastSha1);">Run test</a> with fastsha1.js
+    <ul>
+        <li>Hash Result: <span id="out_fast">Output appears here</span></li>
+        <li>Time per Iteration: <span id="log_fast">Log appears here</span></li>
+    </ul>
+</li>
+
+<li>
+    <a href="javascript:benchmark(document.getElementById('in').value, kOriginalSha1);">Run test</a> with <a href="http://www.webtoolkit.info/javascript-sha1.html">webtoolkit.sha1.js</a>
+    <ul>
+        <li>Hash Result: <span id="out_orig">Output appears here</span></li>
+        <li>Time per Iteration: <span id="log_orig">Log appears here</span></li>
+    </ul>
+</li>
+
+<li>
+    <a href="javascript:benchmark(document.getElementById('in').value, kJsSha1);">Run test</a> with <a href="http://caligatio.github.io/jsSHA/">jsSHA</a>
+    <ul>
+        <li>Hash Result: <span id="out_jssha">Output appears here</span></li>
+        <li>Time per Iteration: <span id="log_jssha">Log appears here</span></li>
+    </ul>
+</li>
+
+<li>
+    <a href="javascript:benchmark(document.getElementById('in').value, kCryptoJSSha1);">Run test</a> with <a href="https://code.google.com/p/crypto-js/">CryptoJS</a>
+    <ul>
+        <li>Hash Result: <span id="out_cryptojs">Output appears here</span></li>
+        <li>Time per Iteration: <span id="log_cryptojs">Log appears here</span></li>
+    </ul>
+</li>
+
+<li>
+    <a href="javascript:benchmark(document.getElementById('in').value, kMtSha1);">Run test</a> with <a href="http://www.movable-type.co.uk/scripts/sha1.html">Movable Type</a>
+    <ul>
+        <li>Hash Result: <span id="out_mt">Output appears here</span></li>
+        <li>Time per Iteration: <span id="log_mt">Log appears here</span></li>
+    </ul>
+</li>
+</ul>
+
+<div id="log"></div>
+
+<h3>Notes</h3>
+
+<p>
+All respective third party libraries are a copyright of their original authors. fastsha1.js is based on
+<a href="http://www.webtoolkit.info">webtoolkit.info</a>'s implementation, with modifications focused on
+performance improvements. As the license of the original work has not been clearly disclosed, until that
+is sorted out the code for fastsha1.js will remain obfuscated for the time being.
+</p>
+
+<p>
+Feedback is welcome via mail (sangwhan at iki period fi) or <a href="http://www.github.com/cynthia">Github</a>.
+</p>
+
+</body>
+</html>
