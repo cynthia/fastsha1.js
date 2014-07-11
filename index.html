@@ -15,8 +15,9 @@
 <script type="text/javascript" src="js/jssha_sha1.js"></script>
 <script type="text/javascript" src="js/benchmark.js"></script>
 
+<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:700,300' rel='stylesheet' type='text/css'>
 <style type="text/css" media="screen">
-    * { font-family: sans-serif; }
+    * { font-family: "Roboto Condensed", sans-serif; }
     input { width: 26em; }
     textarea { width: 97%; min-height: 150px }
 </style>
@@ -28,7 +29,7 @@
 </head>
 
 <body>
-<h1>fastsha1.js Test</h1>
+<h1>fastsha1.js Test Page</h1>
 
 <p>
 fastsha1.js is a experiment to see how far a existing JavaScript codebase can be hand
@@ -118,6 +119,15 @@ not been audited in any way or form so do avoid using it for anything serious.
 </ul>
 
 <div id="log"></div>
+
+<h3>Compared Across Browsers</h3>
+<p>
+The most dramatic performance increase is on Chrome (V8). While not listed here, based on testing with
+UIWebView and Opera 12 (JIT off), it is the fastest in the five implementations compared when run without
+JIT as well. SHA-1 hashing is a very specific operation, so the numbers across browsers should <b>never</b>
+be used as a reliable metric to compare browser performance.</p>
+
+<img src="img/data_mixed.png" alt="Graph comparison of performance between fastsha.js and other implementations">
 
 <h3>Notes</h3>
 
