@@ -20,6 +20,7 @@
     * { font-family: "Roboto Condensed", sans-serif; }
     input { width: 26em; }
     textarea { width: 97%; min-height: 150px }
+    .big-fat-warning { color: red; font-weight: bold; }
 </style>
 
 <title>fastsha1.js Test Page</title>
@@ -48,6 +49,12 @@ slightly slower than the webtoolkit.info implementation, which I haven't investi
 <p>
 While it does generate the exact same hash as other implementations, this implementation has
 not been audited in any way or form so do avoid using it for anything serious.
+</p>
+
+<p class="big-fat-warning">
+For some reason, this page triggers a nasty bug in Firefox on mobile (namely, Firefox for Android
+and Firefox OS) which makes the page load take 30-50 minutes. I haven't analyzed what is triggering
+this, but don't try opening this on mobile Firefox for the time being.
 </p>
 
 <h3>Run Count</h3>
